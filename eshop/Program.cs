@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using eshop.Models.Database;
 
 namespace eshop
 {
@@ -14,7 +16,16 @@ namespace eshop
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            IWebHost webHost = CreateWebHostBuilder(args).Build();
+
+            using (var scope = webHost.Services.CreateScope())
+            {
+                var serviceProvider = scope.ServiceProvider;
+                var dbContext = serviceProvider.GetRequiredService<EshopDBContext>();
+                DbInitializer.Initialize(dbContext);
+            }
+
+                webHost.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

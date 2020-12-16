@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eshop.Models.DatabaseFake
+namespace eshop.Models.Database
 {
     public static class CarouselHelper
     {
@@ -12,9 +12,7 @@ namespace eshop.Models.DatabaseFake
             IList<Carousel> carousels = new List<Carousel>()
             {
                 new Carousel()
-                {
-                    ID=0,
-                    DataTarget="#myCarousel",
+                {   DataTarget="#myCarousel",
                     ImageSrc ="/images/banner1.svg",
                     ImageAlt="ASP.NET",
                     CarouselContent="Learn how to build ASP.NET apps that can run anywhere." +
@@ -22,9 +20,7 @@ namespace eshop.Models.DatabaseFake
                     "Learn More</a>"
                 },
                 new Carousel()
-                {
-                    ID=1,
-                    DataTarget="#myCarousel",
+                {   DataTarget="#myCarousel",
                     ImageSrc ="/images/banner2.svg",
                     ImageAlt="ASP.NET",
                     CarouselContent="There are powerful new features in Visual Studio for building modern web apps." +
@@ -32,9 +28,7 @@ namespace eshop.Models.DatabaseFake
                     "Learn More</a>"
                 },
                 new Carousel()
-                {
-                    ID=2,
-                    DataTarget="#myCarousel",
+                {   DataTarget="#myCarousel",
                     ImageSrc ="/images/banner3.svg",
                     ImageAlt="ASP.NET",
                     CarouselContent="Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps." +
@@ -42,9 +36,7 @@ namespace eshop.Models.DatabaseFake
                     "Learn More</a>"
                 },
                 new Carousel()
-                {
-                    ID=3,
-                    DataTarget="#myCarousel",
+                {   DataTarget="#myCarousel",
                     ImageSrc ="/images/carousel/Information-Technology.jpg",
                     ImageAlt="Information Technology ",
                     CarouselContent="Information Technology. " +
