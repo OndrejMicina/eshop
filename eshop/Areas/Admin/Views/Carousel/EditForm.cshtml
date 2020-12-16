@@ -1,14 +1,16 @@
-﻿@model Carousel
+﻿@using eshop.Areas.Admin.Controllers;
+@model Carousel
 
 @{if (String.IsNullOrWhiteSpace(ViewBag.Action)==false)
     {
         <div class="row">
             <form asp-action="@ViewBag.Action" enctype="multipart/form-data" method="post">
                 <div class="form-group col-sm-4">
-                    <div class="form-group">
-                        <label asp-for="@Model.ID"></label>
-                        <input asp-for="@Model.ID" class="form-control" placeholder="Enter ID">
-                    </div>
+                    @{ if (@ViewBag.Action == nameof(CarouselController.Edit))
+                        {
+                            <input type="hidden" asp-for="@Model.ID" class="form-control">
+                        }
+                       }
                     <div class="form-group">
                         <label asp-for="@Model.DataTarget"></label>
                         <input asp-for="@Model.DataTarget" class="form-control" placeholder="Enter DataTarget">

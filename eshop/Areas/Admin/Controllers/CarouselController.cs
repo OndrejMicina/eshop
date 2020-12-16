@@ -1,7 +1,8 @@
 ﻿using eshop.Models;
-using eshop.Models.DatabaseFake;
+using eshop.Models.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,15 +15,17 @@ namespace eshop.Areas.Admin.Controllers
     public class CarouselController : Controller
     {
         IHostingEnvironment Env;
-        IList<Carousel> Carousels = DatabaseFake.Carousels;
-        public CarouselController(IHostingEnvironment env)
+        readonly EshopDBContext EshopDBContext;
+
+        public CarouselController(EshopDBContext eshopDBContext, IHostingEnvironment env)
         {
+            this.EshopDBContext = eshopDBContext;
             this.Env = env;
         }
-        public IActionResult Select()
+        public async Task<IActionResult> Select()
         {
             CarouselViewModel carousel = new CarouselViewModel();
-            carousel.Carousels = Carousels;
+            carousel.Carousels = await EshopDBContext.Carousels.ToListAsync();
             return View(carousel);
         }
          
@@ -37,14 +40,17 @@ namespace eshop.Areas.Admin.Controllers
             carousel.ImageSrc = String.Empty;
 
             FileUpload fup = new FileUpload(Env);
-            await fup.FileUploadAsync(carousel); 
+            await fup.FileUploadAsync(carousel);
 
-            Carousels.Add(carousel);
+            EshopDBContext.Carousels.Add(carousel);
+
+            await EshopDBContext.SaveChangesAsync();
+
             return RedirectToAction(nameof(Select));
         }
         public IActionResult Edit(int id)
         {
-            Carousel carouselItem = Carousels.Where(carI => carI.ID == id).FirstOrDefault();
+            Carousel carouselItem = EshopDBContext.Carousels.Where(carI => carI.ID == id).FirstOrDefault();
 
             if (carouselItem != null)
             {
@@ -59,7 +65,7 @@ namespace eshop.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Carousel carousel)
         {
-            Carousel carouselItem = Carousels.Where(carI => carI.ID == carousel.ID).FirstOrDefault();
+            Carousel carouselItem = EshopDBContext.Carousels.Where(carI => carI.ID == carousel.ID).FirstOrDefault();
 
             if (carouselItem != null)
             {
@@ -72,7 +78,8 @@ namespace eshop.Areas.Admin.Controllers
                 {
                     carouselItem.ImageSrc = carousel.ImageSrc;
                 }
-                
+
+                await EshopDBContext.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Select));
             }
@@ -82,13 +89,14 @@ namespace eshop.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            Carousel carouselItem = Carousels.Where(carI => carI.ID == id).FirstOrDefault();
+            Carousel carouselItem = EshopDBContext.Carousels.Where(carI => carI.ID == id).FirstOrDefault();
 
             if (carouselItem != null)
             {
-                Carousels.Remove(carouselItem);
+                EshopDBContext.Carousels.Remove(carouselItem);
+                await EshopDBContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Select));
             }
             else
