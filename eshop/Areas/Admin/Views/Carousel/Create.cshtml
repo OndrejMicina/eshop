@@ -1,0 +1,14 @@
+﻿@model Carousel
+@{
+    ViewData["Title"] = "Carousel Creation";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Create new carousel item.</p>
+<br />
+
+@{ViewBag.Action = "Create"; }
+
+@await Html.PartialAsync("EditForm", Model)
+
