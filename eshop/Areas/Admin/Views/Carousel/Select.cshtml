@@ -1,0 +1,38 @@
+﻿@model CarouselViewModel
+@{
+    ViewData["Title"] = "Carousel Select";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Select all data from carousel.</p>
+
+@{
+    if (Model != null && Model.Carousels != null && Model.Carousels.Count > 0)
+    {
+    <table style="width:100%">
+        <tr>
+            <th class="col-sm-1">@Html.DisplayNameFor(model => model.Carousels[0].ID)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.Carousels[0].DataTarget)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.Carousels[0].ImageSrc)</th>
+            <th class="col-sm-2">@Html.DisplayNameFor(model => model.Carousels[0].ImageAlt)</th>
+            <th class="col-sm-4">@Html.DisplayNameFor(model => model.Carousels[0].CarouselContent)</th>
+        </tr>
+        @{ foreach (var itemCarousel in Model.Carousels)
+            {
+                <tr>
+                    <td class="col-sm-1">@itemCarousel.ID </td>
+                    <td class="col-sm-2">@itemCarousel.DataTarget </td>
+                    <td class="col-sm-2">@itemCarousel.ImageSrc </td>
+                    <td class="col-sm-2">@itemCarousel.ImageAlt </td>
+                    <td class="col-sm-4">@itemCarousel.CarouselContent </td>
+                </tr>
+            }
+        }
+    </table>
+    }
+    else
+    { 
+        <h2>Carousel is empty!</h2>
+    }
+}
