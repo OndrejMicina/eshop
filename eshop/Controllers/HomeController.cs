@@ -10,9 +10,13 @@ namespace eshop.Controllers
 {
     public class HomeController : Controller
     {
+        IList<Carousel> carousels = CarouselHelper.GenerateCarousel();
         public IActionResult Index()
         {
-            return View();
+            var vm = new CarouselViewModel();
+            vm.Carousels = carousels;
+
+            return View(vm);
         }
 
         public IActionResult About()
