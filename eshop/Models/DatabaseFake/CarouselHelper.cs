@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eshop.Models
+namespace eshop.Models.DatabaseFake
 {
     public static class CarouselHelper
     {

@@ -1,4 +1,5 @@
 ﻿using eshop.Models;
+using eshop.Models.DatabaseFake;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,12 @@ namespace eshop.Controllers
 {
     public class HomeController : Controller
     {
-        IList<Carousel> carousels = CarouselHelper.GenerateCarousel();
+        IList<Carousel> Carousels = DatabaseFake.Carousels;
         public IActionResult Index()
         {
-            var vm = new CarouselViewModel();
-            vm.Carousels = carousels;
-
-            return View(vm);
+            CarouselViewModel carousel = new CarouselViewModel();
+            carousel.Carousels = Carousels;
+            return View(carousel);
         }
 
         public IActionResult About()
