@@ -14,105 +14,207 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/css/Styles.css" />
+        <link rel="stylesheet" href="~/css/shop-template.css">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="~/css/Styles.css" />
+        <link rel="stylesheet" href="~/css/shop-template.css">
     </environment>
 }
 
-@{
-    if (Model != null && Model.Carousels != null && Model.Carousels.Count > 0)
-    {
-        <div id="@Model.Carousels[0].DataTarget.Substring(1,Model.Carousels[0].DataTarget.Length-1)" class="carousel slide" data-ride="carousel" data-interval="6000">
-            <ol class="carousel-indicators">
-                @{
-                    for (int i = 0; i < Model.Carousels.Count; ++i)
-                    {
-                        string classLi = String.Empty;
-                        if (i == 0)
-                        {
-                            classLi = "class=\"active\"";
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+
+        @{
+            if (Model != null && Model.Carousels != null && Model.Carousels.Count > 0)
+            {
+                <div id="@Model.Carousels[0].DataTarget.Substring(1,Model.Carousels[0].DataTarget.Length-1)" class="carousel slide" data-ride="carousel" data-interval="6000">
+                    <ol class="carousel-indicators">
+                        @{
+                            for (int i = 0; i < Model.Carousels.Count; ++i)
+                            {
+                                string classLi = String.Empty;
+                                if (i == 0)
+                                {
+                                    classLi = "class=\"active\"";
+                                }
+
+                                <li data-target="@Model.Carousels[i].DataTarget" data-slide-to="@i" @Html.Raw(classLi)></li>
+                            }
+
                         }
 
-                        <li data-target="@Model.Carousels[i].DataTarget" data-slide-to="@i" @Html.Raw(classLi)></li>
-                    }
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        @{
+                            for (int i = 0; i < Model.Carousels.Count; ++i)
+                            {
+                                string classItem = "item";
+                                if (i == 0)
+                                {
+                                    classItem = "item active";
+                                }
 
-                }
-
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                @{
-                    for (int i = 0; i < Model.Carousels.Count; ++i)
-                    {
-                        string classItem = "item";
-                        if (i == 0)
-                        {
-                            classItem = "item active";
+                                <div class="@classItem  maxHeightCarousel">
+                                    <img src="@Model.Carousels[i].ImageSrc" alt="@Model.Carousels[i].ImageAlt" class="img-responsive" />
+                                    <div class="carousel-caption" role="option">
+                                        <p>
+                                            @Html.Raw(Model.Carousels[i].CarouselContent)
+                                        </p>
+                                    </div>
+                                </div>
+                            }
                         }
 
-                        <div class="@classItem  maxHeightCarousel">
-                            <img src="@Model.Carousels[i].ImageSrc" alt="@Model.Carousels[i].ImageAlt" class="img-responsive" />
-                            <div class="carousel-caption" role="option">
-                                <p>
-                                    @Html.Raw(Model.Carousels[i].CarouselContent)
-                                </p>
+
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            }
+        }
+
+
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row">
+
+
+                <div class="">
+                    <div class="row">
+                        <div class="">
+
+                            <h1 class="my-4 text-center">Products</h1>
+                            <div class="list-group col-md-offset-4 col-md-4 text-center">
+                                <a href="#" class="list-group-item col-md-4">Category 1</a>
+                                <a href="#" class="list-group-item col-md-4">Category 2</a>
+                                <a href="#" class="list-group-item col-md-4">Category 3</a>
+                            </div>
+
+                        </div>
+                        <!-- /.col-lg-3 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top img-responsive" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">Item One</a>
+                                    </h4>
+                                    <h5>$24.99</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
                             </div>
                         </div>
-                    }
-                }
 
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top img-responsive" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">Item Two</a>
+                                    </h4>
+                                    <h5>$24.99</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top img-responsive" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">Item Three</a>
+                                    </h4>
+                                    <h5>$24.99</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top img-responsive" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">Item Four</a>
+                                    </h4>
+                                    <h5>$24.99</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top img-responsive" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">Item Five</a>
+                                    </h4>
+                                    <h5>$24.99</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100">
+                                <a href="#"><img class="card-img-top img-responsive" src="http://placehold.it/700x400" alt=""></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#">Item Six</a>
+                                    </h4>
+                                    <h5>$24.99</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!-- /.col-lg-9 -->
 
             </div>
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <!-- /.row -->
+
         </div>
-    }
-}
-
-
-
-<div class="row">
-    <div class="col-md-3">
-        <h2>@cislo</h2>
-        <ul>
-            <li>@cislo + @cislo =  @(cislo+cislo)</li>
-            <li> @(DateTime.Now - TimeSpan.FromDays(-7)) Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
+        <!-- /.container -->
     </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
+        <partial name="../Products/ProductsPartial" />
+    
 </div>
+<!-- /.container -->
