@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace eshop.Models.Database.Configuration
 {
-    public class OrderConfiguration : EntityConfiguration, IEntityTypeConfiguration<Order>
+    public class CarouselConfiguration : EntityConfiguration, IEntityTypeConfiguration<Carousel>
     {
-        public void Configure(EntityTypeBuilder<Order> builder)
+        public void Configure(EntityTypeBuilder<Carousel> builder)
         {
 
             base.Configure(builder);

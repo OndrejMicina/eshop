@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace eshop.Models.Database.Configuration
 {
-    public class OrderItemConfiguration :EntityConfiguration, IEntityTypeConfiguration<OrderItem>
+    public class EntityConfiguration
     {
-        public void Configure(EntityTypeBuilder<OrderItem> builder)
-        {
-            base.Configure(builder);
 
+        public void Configure(EntityTypeBuilder builder)
+        {
+            builder.Property(nameof(Entity.DateTimeCreated))
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("GETDATE()");
         }
     }
 }

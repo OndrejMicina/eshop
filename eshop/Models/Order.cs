@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 namespace eshop.Models
 {
     [Table(nameof(Order))]
-    public class Order
+    public class Order :Entity
     {
-        [Key]
-        [Required]
-        public int ID { get; set; }
+
         [Required]
         [StringLength(25)]
         public string OrderNumber { get; set; }
