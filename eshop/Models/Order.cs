@@ -14,6 +14,7 @@ namespace eshop.Models
         [Required]
         public int ID { get; set; }
         [Required]
+        [StringLength(25)]
         public string OrderNumber { get; set; }
         public IList<OrderItem> OrderItems { get; set; }
     }

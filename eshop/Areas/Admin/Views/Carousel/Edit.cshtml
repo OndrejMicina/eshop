@@ -11,3 +11,7 @@
 @{ViewBag.Action = "Edit"; }
 
 <partial name="EditForm" model="Model">
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
