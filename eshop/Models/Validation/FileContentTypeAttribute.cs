@@ -31,7 +31,7 @@ namespace eshop.Models.Validation
                 }
                 else
                 {
-                    return new ValidationResult(GetErrorMessage(validationContext.MemberName), new List<string> { validationContext.MemberName });
+                    return new ValidationResult(GetErrorMessage("File"), new List<string> { validationContext.MemberName });
                 }
             }
 
@@ -45,7 +45,7 @@ namespace eshop.Models.Validation
         public void AddValidation(ClientModelValidationContext context)
         {
             MergeAttribute(context.Attributes, "data-val", "true");
-            MergeAttribute(context.Attributes, "data-val-filecontent", GetErrorMessage("File "));
+            MergeAttribute(context.Attributes, "data-val-filecontent", GetErrorMessage("File"));
             MergeAttribute(context.Attributes, "data-val-filecontent-type", contentType);
         }
 

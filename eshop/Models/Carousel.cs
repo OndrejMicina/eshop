@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace eshop.Models
 {
     [Table("Carousel")]
-    public class Carousel
+    public class Carousel 
     {
         [Key]
         [Required]

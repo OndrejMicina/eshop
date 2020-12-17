@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="@Model.Image"></label>
-                        <input asp-for="@Model.Image" accept="image/*" class="form-inline">
+                        <input id="fileupload" asp-for="@Model.Image" accept="image/*" class="form-inline">
                         <span asp-validation-for="@Model.Image" class="text-danger"></span>
                         <input type="hidden" value="/" asp-for="@Model.ImageSrc" class="form-control">
                     </div>
