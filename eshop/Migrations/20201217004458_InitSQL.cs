@@ -60,7 +60,7 @@ namespace eshop.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DateTimeCreated = table.Column<DateTime>(nullable: false),
+                    DateTimeCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "GETDATE()"),
                     OrderID = table.Column<int>(nullable: false),
                     ProductID = table.Column<int>(nullable: false),
                     Amount = table.Column<int>(nullable: false),

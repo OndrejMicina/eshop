@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 namespace eshop.Models
 {
     [Table("Carousel")]
-    public class Carousel : Entity
+    public class Carousel
     {
-
+        [Key]
+        [Required]
+        public int ID { get; set; }
         [Required]
         public string DataTarget { get; set; }
         [NotMapped]

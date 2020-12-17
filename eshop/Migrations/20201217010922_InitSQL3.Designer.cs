@@ -10,8 +10,8 @@ using eshop.Models.Database;
 namespace eshop.Migrations
 {
     [DbContext(typeof(EshopDBContext))]
-    [Migration("20201217002127_InitSQL")]
-    partial class InitSQL
+    [Migration("20201217010922_InitSQL3")]
+    partial class InitSQL3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,7 +70,8 @@ namespace eshop.Migrations
                     b.Property<int>("Amount");
 
                     b.Property<DateTime>("DateTimeCreated")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int>("OrderID");
 
