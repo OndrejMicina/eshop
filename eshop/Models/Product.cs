@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace eshop.Models
 {
-    [Table("Carousel")]
-    public class Carousel : Entity
+    [Table(nameof(Product))]
+    public class Product
     {
-
+        [Key]
+        [Required]
+        public int ID { get; set; }
         [Required]
         public string DataTarget { get; set; }
         [NotMapped]
@@ -21,7 +23,7 @@ namespace eshop.Models
         [Required]
         public string ImageAlt { get; set; }
         [Required]
-        public string CarouselContent { get; set; }
+        public string ProductInfo { get; set; }
 
 
     }

@@ -13,6 +13,9 @@ namespace eshop.Models.Database
 
         }
         public DbSet<Carousel> Carousels { get; set; }
-        //public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
     }
 }
