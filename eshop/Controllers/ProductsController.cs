@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eshop.Controllers
 {
-    public class ProductsControler : Controller
+    public class ProductsController : Controller
     {
         public IActionResult Detail()
         {
