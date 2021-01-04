@@ -22,10 +22,13 @@ namespace eshop
             {
                 var serviceProvider = scope.ServiceProvider;
                 var dbContext = serviceProvider.GetRequiredService<EshopDBContext>();
-                DbInitializer.Initialize(dbContext);
+                DbInitializer.Initialize(dbContext);                
             }
 
-                webHost.Run();
+            DbInitializer.EnsureRoleCreated(webHost.Services);
+            DbInitializer.EnsureAdminCreated(webHost.Services);
+
+            webHost.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eshop.Models.Database;
 
 namespace eshop.Migrations
 {
     [DbContext(typeof(EshopDBContext))]
-    partial class EshopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210104184212_Migrace_ROLE_ADMIN_WITHOUT_ASPNET")]
+    partial class Migrace_ROLE_ADMIN_WITHOUT_ASPNET
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

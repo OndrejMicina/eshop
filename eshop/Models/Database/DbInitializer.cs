@@ -1,5 +1,9 @@
-﻿using System;
+﻿using eshop.Models.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,5 +34,65 @@ namespace eshop.Models.Database
                 dbContext.SaveChanges();
             }
         }
+
+        public async static void EnsureRoleCreated(IServiceProvider serviceProvider)
+        {
+            using (var services = serviceProvider.CreateScope())
+            {
+                RoleManager<Role> roleManager = services.ServiceProvider.GetRequiredService<RoleManager<Role>>();
+
+                string[] roles = Enum.GetNames(typeof(Roles));
+                foreach(var role in roles)
+                {
+                    await roleManager.CreateAsync(new Role(role));
+                }
+
+            }
+        }
+
+        public async static void EnsureAdminCreated(IServiceProvider serviceProvider)
+        {
+            using (var services = serviceProvider.CreateScope())
+            {
+                UserManager<User> userManager = services.ServiceProvider.GetRequiredService<UserManager<User>>();
+                User admin = new User()
+                {
+                    UserName = "admin",
+                    Email = "admin_micina@utb.cz",
+                    Name = "Ondrej",
+                    LastName = "Micina",
+                    EmailConfirmed = true
+                };
+                var password = "abcd";
+
+                User adminInDatabase = await userManager.FindByNameAsync(admin.UserName);
+                if (adminInDatabase==null)
+                {
+                    IdentityResult iResult = await userManager.CreateAsync(admin, password);
+
+                    if (iResult.Succeeded)
+                    {
+                        string[] roles = Enum.GetNames(typeof(Roles));
+                        foreach (var role in roles)
+                        {
+                            await userManager.AddToRoleAsync(admin, role);
+                        }
+                    }
+                    else if (iResult.Errors!=null && iResult.Errors.Count()>0)
+                    {
+                        foreach (var error in iResult.Errors)
+                        {
+                            Debug.WriteLine("Error during role Creation: " +error.Code + " -> "+error.Description);
+                        }
+                        
+                    }
+
+                }
+
+                
+
+            }
+        }
+
     }
 }

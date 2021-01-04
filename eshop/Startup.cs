@@ -1,8 +1,10 @@
 ﻿using eshop.Models.Database;
+using eshop.Models.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,7 +35,41 @@ namespace eshop
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            
+
             services.AddDbContext<EshopDBContext>(options=> options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=UTB.Shop;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<EshopDBContext>()
+                    .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredUniqueChars = 3;
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                options.User.RequireUniqueEmail = true;
+
+            });
+
+           /*services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                options.LoginPath = "/Security/Account/Login";
+                options.LogoutPath = "/Security/Account/Logout";
+                options.SlidingExpiration = true;
+               
+
+            });*/
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -53,6 +89,8 @@ namespace eshop
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

@@ -12,7 +12,6 @@ namespace eshop.Models
     [Table("Carousel")]
     public class Carousel : Entity
     {
-
         [Required]
         public string DataTarget { get; set; }
         [NotMapped]
