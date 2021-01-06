@@ -1,7 +1,97 @@
 ﻿@{
     ViewData["Title"] = "Register";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Register.</p>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .fa {
+        padding: 10px;
+        font-size: 20px;
+        width: 40px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px 2px;
+        border-radius: 50%;
+    }
+
+        .fa:hover {
+            opacity: 0.4;
+        }
+
+    .fa-facebook {
+        background: #3B5998;
+        color: white;
+    }
+
+    .fa-twitter {
+        background: #55ACEE;
+        color: white;
+    }
+
+    .fa-google {
+        background: #dd4b39;
+        color: white;
+    }
+
+    .fa-linkedin {
+        background: #007bb5;
+        color: white;
+    }
+</style>
+
+
+
+<form class="container center_div" style="padding:20%;">
+    <h2>@ViewData["Title"]</h2>
+    <!-- Email input -->
+    <div class="form-outline b-4" style="padding-bottom:10px;">
+        <input type="text" placeholder="Username*" class="form-control" />
+    </div>
+    <!-- First/Last name input -->
+    <div class="row">
+        <div class="form-outline col-sm-6" style="padding-bottom:10px;">
+            <input type="text" placeholder="First name" class="form-control" />
+        </div>
+        <div class="form-outline col-sm-6" style="padding-bottom:10px;">
+            <input type="text" placeholder="Last name" class="form-control" />
+        </div>
+    </div>
+    <!-- Email input -->
+    <div class="form-outline b-4" style="padding-bottom:10px;">
+        <input type="email" placeholder="Email address*" class="form-control" />
+    </div>
+    <!-- Phone input -->
+    <div class="form-outline b-4" style="padding-bottom:10px;">
+        <input type="tel" placeholder="Phone number" class="form-control" />
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4" style="padding-bottom:10px;">
+        <input type="password" placeholder="Password*" class="form-control" />
+    </div>
+    <div class="form-outline mb-4" style="padding-bottom:5px;">
+        <input type="password" placeholder="Repeat password*" class="form-control" />
+    </div>
+    <p class="small" style="margin-bottom:inherit;">*Required</p>
+    <!-- Checkbox -->
+    <div class="form-check text-center" >
+        <input class="form-check-input"
+               type="checkbox"
+               value="" 
+               checked/>
+        <label class="form-check-label"> Remember me </label>
+    </div>
+
+    <!-- Submit button -->
+    <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+
+    <!-- Register buttons -->
+    <div class="text-center" style="padding-top:10px;">
+        <p>or sign up with:</p>
+        <a href="#" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-twitter"></a>
+        <a href="#" class="fa fa-google"></a>
+        <a href="#" class="fa fa-linkedin"></a>
+    </div>
+</form>

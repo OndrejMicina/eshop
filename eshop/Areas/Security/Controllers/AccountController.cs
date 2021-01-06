@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace eshop.Areas.Security.Controllers
 {
+    [Area("Security")]
+    [AllowAnonymous]
     public class AccountController : Controller
     {
-        [Area("Security")]
-        [AllowAnonymous]
+        
         public IActionResult Login()
         {
             return View();

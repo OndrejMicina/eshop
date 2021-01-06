@@ -44,12 +44,12 @@ namespace eshop
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 3;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
                 options.Password.RequireLowercase = true;
-                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequiredUniqueChars = 6;
 
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 10;

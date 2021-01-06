@@ -89,7 +89,41 @@ namespace eshop.Models.Database
 
                 }
 
-                
+                User manager = new User()
+                {
+                    UserName = "manager",
+                    Email = "manager_micina@utb.cz",
+                    Name = "Ondrej",
+                    LastName = "Micina",
+                    EmailConfirmed = true
+                };
+
+                User managerInDatabase = await userManager.FindByNameAsync(manager.UserName);
+                if (managerInDatabase == null)
+                {
+                    IdentityResult iResult = await userManager.CreateAsync(manager, password);
+
+                    if (iResult.Succeeded)
+                    {
+                        string[] roles = Enum.GetNames(typeof(Roles));
+                        foreach (var role in roles)
+                        {
+                            if (role !=Roles.Admin.ToString())
+                            await userManager.AddToRoleAsync(manager, role);
+                        }
+                    }
+                    else if (iResult.Errors != null && iResult.Errors.Count() > 0)
+                    {
+                        foreach (var error in iResult.Errors)
+                        {
+                            Debug.WriteLine("Error during role Creation: " + error.Code + " -> " + error.Description);
+                        }
+
+                    }
+
+                }
+
+
 
             }
         }
