@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace eshop.Models.Validation
 {
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter, AllowMultiple = false)]
     public class FileContentTypeAttribute : ValidationAttribute, IClientModelValidator
-    {
+    {        
         private readonly string contentType;
         public FileContentTypeAttribute(string contentType)
         {
@@ -44,19 +45,10 @@ namespace eshop.Models.Validation
         }
         public void AddValidation(ClientModelValidationContext context)
         {
-            MergeAttribute(context.Attributes, "data-val", "true");
-            MergeAttribute(context.Attributes, "data-val-filecontent", GetErrorMessage("File"));
-            MergeAttribute(context.Attributes, "data-val-filecontent-type", contentType);
+            ClientSideAttributeHelper.MergeAttribute(context.Attributes, "data-val", "true");
+            ClientSideAttributeHelper.MergeAttribute(context.Attributes, "data-val-filecontent", GetErrorMessage("File"));
+            ClientSideAttributeHelper.MergeAttribute(context.Attributes, "data-val-filecontent-type", contentType);
         }
-
-        private bool MergeAttribute(IDictionary<string,string> attributes,string key,string value)
-        {
-            if (attributes.ContainsKey(key))
-            {
-                return false;
-            }
-            attributes.Add(key, value);
-            return true;
-        }
+        
     }
 }
