@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eshop.Models.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,10 +21,13 @@ namespace eshop.Models
         public string PhoneNumber { get; set; }
 
         [Required]
-        //[UniqueCharacters(6)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$", ErrorMessage=RegisterViewModel.ErrorMessagePassword)]
+        [UniqueCharacters(6)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$", ErrorMessage = RegisterViewModel.ErrorMessagePassword)]
         public string Password { get; set; }
-        private const string ErrorMessagePassword = "Password does not met requirements";
+        private const string ErrorMessagePassword = "Password does not met requirements. " +
+            "Required: 8 characters, 6 unique, non-alphanumeric, upper, lower case! ";
+
+
 
         [Required]
         [Compare(nameof(Password),ErrorMessage = "Passwords do not match")]

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model eshop.Models.RegisterViewModel
+@{
     ViewData["Title"] = "Register";
 }
 
@@ -46,43 +47,46 @@
     <h2>@ViewData["Title"]</h2>
     <!-- Email input -->
     <div class="form-outline b-4" style="padding-bottom:10px;">
-        <input type="text" placeholder="Username*" class="form-control" />
+        <input asp-for="Username" type="text" placeholder="Username*" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
     </div>
     <!-- First/Last name input -->
     <div class="row">
         <div class="form-outline col-sm-6" style="padding-bottom:10px;">
-            <input type="text" placeholder="First name" class="form-control" />
+            <input asp-for="FirstName" type="text" placeholder="First name" class="form-control" />
         </div>
         <div class="form-outline col-sm-6" style="padding-bottom:10px;">
-            <input type="text" placeholder="Last name" class="form-control" />
+            <input asp-for="LastName" type="text" placeholder="Last name" class="form-control" />
         </div>
     </div>
     <!-- Email input -->
     <div class="form-outline b-4" style="padding-bottom:10px;">
-        <input type="email" placeholder="Email address*" class="form-control" />
+        <input asp-for="Email" type="email" placeholder="Email address*" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <!-- Phone input -->
     <div class="form-outline b-4" style="padding-bottom:10px;">
-        <input type="tel" placeholder="Phone number" class="form-control" />
+        <input asp-for="PhoneNumber" type="tel" placeholder="Phone number" class="form-control" />
     </div>
 
     <!-- Password input -->
     <div class="form-outline mb-4" style="padding-bottom:10px;">
-        <input type="password" placeholder="Password*" class="form-control" />
+        <input id="password" asp-for="Password" type="password" placeholder="Password*" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
     </div>
     <div class="form-outline mb-4" style="padding-bottom:5px;">
-        <input type="password" placeholder="Repeat password*" class="form-control" />
+        <input asp-for="RepeatedPassword" type="password" placeholder="Repeat password*" class="form-control" />
     </div>
     <p class="small" style="margin-bottom:inherit;">*Required</p>
-    <!-- Checkbox -->
-    <div class="form-check text-center" >
+    <!-- Checkbox
+    <div class="form-check text-center">
         <input class="form-check-input"
                type="checkbox"
-               value="" 
-               checked/>
+               value=""
+               checked />
         <label class="form-check-label"> Remember me </label>
-    </div>
-
+    </div>-->
     <!-- Submit button -->
     <button type="submit" class="btn btn-primary btn-block">Sign up</button>
 
@@ -95,3 +99,9 @@
         <a href="#" class="fa fa-linkedin"></a>
     </div>
 </form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/Validation/UniqueCharactersValidation.js"></script>
+}
