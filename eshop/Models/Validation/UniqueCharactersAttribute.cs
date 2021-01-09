@@ -18,7 +18,7 @@ namespace eshop.Models.Validation
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            string password = (string)validationContext.ObjectInstance;
+            string password = (string)value;
             int charCount = password.Distinct().Count();
             if (charCount >= charactersCountRequired)
             {

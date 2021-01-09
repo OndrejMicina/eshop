@@ -27,8 +27,6 @@ namespace eshop.Models
         private const string ErrorMessagePassword = "Password does not met requirements. " +
             "Required: 8 characters, 6 unique, non-alphanumeric, upper, lower case! ";
 
-
-
         [Required]
         [Compare(nameof(Password),ErrorMessage = "Passwords do not match")]
         public string RepeatedPassword { get; set; }

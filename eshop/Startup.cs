@@ -1,4 +1,5 @@
-﻿using eshop.Models.Database;
+﻿using eshop.Models.ApplicationServices;
+using eshop.Models.Database;
 using eshop.Models.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -59,7 +60,7 @@ namespace eshop
 
             });
 
-           /*services.ConfigureApplicationCookie(options =>
+           services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
@@ -68,7 +69,9 @@ namespace eshop
                 options.SlidingExpiration = true;
                
 
-            });*/
+            });
+
+            services.AddScoped<ISecurityApplicationService, SecurityIdentityApplicationService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

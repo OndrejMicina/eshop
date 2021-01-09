@@ -1,7 +1,7 @@
-﻿@{
+﻿@model LoginViewModel
+@{
     ViewData["Title"] = "Login";
 }
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -14,40 +14,46 @@
         margin: 5px 2px;
         border-radius: 50%;
     }
+
         .fa:hover {
             opacity: 0.4;
         }
+
     .fa-facebook {
         background: #3B5998;
         color: white;
     }
+
     .fa-twitter {
         background: #55ACEE;
         color: white;
     }
+
     .fa-google {
         background: #dd4b39;
         color: white;
     }
+
     .fa-linkedin {
         background: #007bb5;
         color: white;
     }
-        
 </style>
 
 
-
-<form class="container center_div" style="padding:20%;">
-    <h2>@ViewData["Title"]</h2>
-    <!-- Email input -->
-    <div class="form-outline b-4" style="padding-bottom:10px;">
-        <input type="email" placeholder="Email address" class="form-control" />
+<form class="container center_div" style="padding:20%;" method="post">
+    <h2>@ViewData["Title"]</h2>    
+    <!-- Username input -->
+    <div class="form-outline b-4" style="padding-bottom:10px;">        
+        <input asp-for="Username" type="text" placeholder="Username*" class="form-control" />
+        <span asp-validation-for="Username" class="text-danger"></span>
     </div>
 
     <!-- Password input -->
     <div class="form-outline mb-4" style="padding-bottom:10px;">
-        <input type="password" placeholder="Password" class="form-control" />
+        <input type="password" placeholder="Password" class="form-control" asp-for="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <span class="text-danger center_div">@ViewData["Failed"]</span>
     </div>
 
     <!-- 2 column grid layout for inline styling -->

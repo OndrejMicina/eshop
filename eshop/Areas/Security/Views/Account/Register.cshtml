@@ -1,4 +1,4 @@
-﻿@model eshop.Models.RegisterViewModel
+﻿@model RegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -43,7 +43,7 @@
 
 
 
-<form class="container center_div" style="padding:20%;">
+<form class="container center_div" style="padding:20%;" method="post">
     <h2>@ViewData["Title"]</h2>
     <!-- Email input -->
     <div class="form-outline b-4" style="padding-bottom:10px;">
@@ -77,6 +77,8 @@
     </div>
     <div class="form-outline mb-4" style="padding-bottom:5px;">
         <input asp-for="RepeatedPassword" type="password" placeholder="Repeat password*" class="form-control" />
+        <span class="text-danger">@ViewData["Error"]</span>
+        
     </div>
     <p class="small" style="margin-bottom:inherit;">*Required</p>
     <!-- Checkbox

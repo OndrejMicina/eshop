@@ -34,14 +34,37 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="Admin" asp-controller="Carousel" asp-action="Select">Carousel</a></li>
-                    <li><a asp-area="Admin" asp-controller="Orders" asp-action="Index">Order</a></li>
-                    <li><a asp-area="Admin" asp-controller="OrderItems" asp-action="Index">OrderItem</a></li>
+                    @{
+                        @if (User.Identity.IsAuthenticated == true && (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.Manager.ToString())))
+                        {
+                            <li><a asp-area="Admin" asp-controller="Carousel" asp-action="Select">Carousel</a></li>
+                            <li><a asp-area="Admin" asp-controller="Orders" asp-action="Index">Order</a></li>                            
+                        }
+                        @if (User.Identity.IsAuthenticated == true && User.IsInRole(Roles.Admin.ToString()))
+                        {
+                            <li><a asp-area="Admin" asp-controller="OrderItems" asp-action="Index">OrderItem</a></li>
+                        }
+                    }
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="Security" asp-controller="Account" asp-action="Login">Login</a></li>
-                    <li><a asp-area="Security" asp-controller="Account" asp-action="Register">Register</a></li>
-                </ul>
+                @{
+                    @if (User.Identity.IsAuthenticated == false)
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a asp-area="Security" asp-controller="Account" asp-action="Login">Login</a></li>
+                            <li><a asp-area="Security" asp-controller="Account" asp-action="Register">Register</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="navbar-item dropdown">
+                                <a class="navbar-link" href="#" data-toggle="dropdown">Logged as @User.Identity.Name</a>
+                                <ul class="dropdown-menu">
+                                    <li><a asp-area="Security" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                </ul>                            
+                        </ul>
+                    }
+                }
             </div>
         </div>
     </nav>
