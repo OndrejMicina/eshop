@@ -3,22 +3,15 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
-@{
-    double cislo = 15;
-}
-
 @section Styles
 {
-    <link rel="stylesheet" href="~/css/Styles.css" />
-
     <environment include="Development">
         <link rel="stylesheet" href="~/css/Styles.css" />
         <link rel="stylesheet" href="~/css/shop-template.css">
     </environment>
     <environment exclude="Development">
-        <link rel="stylesheet" href="~/css/Styles.css" />
-        <link rel="stylesheet" href="~/css/shop-template.css">
+        <link rel="stylesheet" href="~/css/Styles.min.css" />
+        <link rel="stylesheet" href="~/css/shop-template.min.css">
     </environment>
 }
 

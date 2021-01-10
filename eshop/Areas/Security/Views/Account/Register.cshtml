@@ -78,7 +78,7 @@
     <div class="form-outline mb-4" style="padding-bottom:5px;">
         <input asp-for="RepeatedPassword" type="password" placeholder="Repeat password*" class="form-control" />
         <span class="text-danger">@ViewData["Error"]</span>
-        
+
     </div>
     <p class="small" style="margin-bottom:inherit;">*Required</p>
     <!-- Checkbox
@@ -105,5 +105,13 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/js/Validation/UniqueCharactersValidation.js"></script>
+    
+    <environment include="Development">
+        <script src="~/js/Validation/UniqueCharactersValidation.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Validation/UniqueCharactersValidation.min.js"></script>
+    </environment>
+
+
 }
