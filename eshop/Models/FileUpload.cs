@@ -34,7 +34,7 @@ namespace eshop.Models
             var img = iFormFile;
             if (CheckFileContent(iFormFile) && CheckFileLength(iFormFile))
             {
-                var fileName = Path.GetFileName(img.FileName);
+                var fileName = Path.GetFileNameWithoutExtension(img.FileName);
                 var fileExtension = Path.GetExtension(img.FileName);
                 var fileNameGenerated = Path.GetRandomFileName();
 

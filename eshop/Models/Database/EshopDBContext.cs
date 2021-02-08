@@ -28,8 +28,9 @@ namespace eshop.Models.Database
             modelBuilder.ApplyConfiguration(new CarouselConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
 
-            foreach(var entity in modelBuilder.Model.GetEntityTypes())
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
                 entity.Relational().TableName = entity.Relational().TableName.Replace("AspNet", String.Empty);
             }

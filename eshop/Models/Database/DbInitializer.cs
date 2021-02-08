@@ -63,7 +63,7 @@ namespace eshop.Models.Database
                     LastName = "Micina",
                     EmailConfirmed = true
                 };
-                var password = "abcd";
+                var password = "Abcdefgh*1";
 
                 User adminInDatabase = await userManager.FindByNameAsync(admin.UserName);
                 if (adminInDatabase==null)

@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 namespace eshop.Models
 {
     [Table(nameof(Product))]
-    public class Product
+    public class Product:Entity
     {
-        [Key]
-        [Required]
-        public int ID { get; set; }
         [Required]
         public string DataTarget { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public int Price { get; set; }
         [NotMapped]
         public IFormFile Image { get; set; }
         [Required]

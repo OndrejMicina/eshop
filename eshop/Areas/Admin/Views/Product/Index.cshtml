@@ -1,0 +1,64 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Use this area to provide additional information.</p>
+
+<br />
+<a asp-action="Create">Create</a>
+<br />
+<br />
+
+@{
+    if (Model != null && Model.Products != null && Model.Products.Count > 0)
+    {
+        <table style="width:100%">
+            <tr>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Products[0].ID)</th>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Products[0].Name)</th>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Products[0].Price)</th>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Products[0].DataTarget)</th>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Products[0].ImageSrc)</th>
+                <th class="col-sm-1">@Html.DisplayNameFor(model => model.Products[0].ImageAlt)</th>
+                <th class="col-sm-4">@Html.DisplayNameFor(model => model.Products[0].ProductInfo)</th>
+                <th class="col-sm-1">Edit</th>
+                <th class="col-sm-1">Delete</th>
+
+
+            </tr>
+            @{ foreach (var itemProduct in Model.Products)
+                {
+                        <tr>
+                            <td class="col-sm-1">@itemProduct.ID </td>
+                            <td class="col-sm-1">@itemProduct.Name </td>
+                            <td class="col-sm-1">@itemProduct.Price </td>
+                            <td class="col-sm-1">@itemProduct.DataTarget </td>
+                            <td class="col-sm-1">@itemProduct.ImageSrc </td>
+                            <td class="col-sm-1">@itemProduct.ImageAlt </td>
+                            <td class="col-sm-4">@itemProduct.ProductInfo </td>
+                            <td class="col-sm-1"><a asp-action="Edit" asp-route-ID="@itemProduct.ID">Edit</a></td>
+                            <td class="col-sm-1"><a asp-action="Delete" asp-route-ID="@itemProduct.ID" onclick="return ConfirmDelete();">Delete</a></td>
+                        </tr>
+                }
+            }
+        </table>
+    }
+    else
+    {
+        <h2>Product is empty!</h2>
+    }
+}
+
+@section Scripts
+{
+
+    <environment include="Development">
+        <script src="~/js/Scripts.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Scripts.min.js"></script>
+    </environment>
+}

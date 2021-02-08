@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - eshop</title>
 
-    <environment include="Development">
+    <environment include="Development">    
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -34,17 +34,22 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+
                     @{
                         @if (User.Identity.IsAuthenticated == true && (User.IsInRole(Roles.Admin.ToString()) || User.IsInRole(Roles.Manager.ToString())))
                         {
                             <li><a asp-area="Admin" asp-controller="Carousel" asp-action="Select">Carousel</a></li>
-                            <li><a asp-area="Admin" asp-controller="Orders" asp-action="Index">Order</a></li>                            
+                            <li><a asp-area="Admin" asp-controller="Orders" asp-action="Index">Order</a></li>
+
+
+
                         }
                         @if (User.Identity.IsAuthenticated == true && User.IsInRole(Roles.Admin.ToString()))
                         {
                             <li><a asp-area="Admin" asp-controller="OrderItems" asp-action="Index">OrderItem</a></li>
                         }
                     }
+                    <li><a asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a></li>
                 </ul>
                 @{
                     @if (User.Identity.IsAuthenticated == false)
@@ -80,6 +85,9 @@
     </div>
 
     <environment include="Development">
+        
+
+
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
