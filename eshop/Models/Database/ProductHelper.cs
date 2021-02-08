@@ -7,7 +7,7 @@ namespace eshop.Models.Database
 {
     public static class ProductHelper
     {
-        public static IList<Product> GenerateCarousel()
+        public static IList<Product> GenerateProducts()
         {
             IList<Product> products = new List<Product>()
             {

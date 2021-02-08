@@ -16,6 +16,7 @@ namespace eshop.Controllers
     {
         readonly EshopDBContext EshopDBContext;
         readonly ILogger<HomeController> logger;
+        private IList<Product> products;
         
         public HomeController (EshopDBContext eshopDBContext, ILogger<HomeController> logger)
         {
@@ -25,8 +26,10 @@ namespace eshop.Controllers
 
         public async  Task<IActionResult> Index()
         {
+            products = ProductHelper.GenerateProducts();
             CarouselViewModel carousel = new CarouselViewModel();
             carousel.Carousels = await EshopDBContext.Carousels.ToListAsync();
+            ViewData["Products"] = products;
             return View(carousel);
         }
 

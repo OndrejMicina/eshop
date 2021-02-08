@@ -26,7 +26,7 @@ namespace eshop.Models.Database
             }
             if (dbContext.Products.Count()==0)
             {
-                IList<Product> products = ProductHelper.GenerateCarousel();
+                IList<Product> products = ProductHelper.GenerateProducts();
                 foreach (var item in products)
                 {
                     dbContext.Products.Add(item);
