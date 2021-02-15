@@ -38,5 +38,73 @@ namespace eshop.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> AddToCart(int id)
+        {
+            //realne nepouzitelne
+
+            string lastOrderIDstring;
+
+            if (!EshopDBContext.Order.Any())
+            {
+                lastOrderIDstring = "0";
+            }
+            else lastOrderIDstring = EshopDBContext.Order.OrderByDescending(o => o.OrderNumber).FirstOrDefault().OrderNumber;
+
+            Product productItem = EshopDBContext.Products.Where(carI => carI.ID == id).FirstOrDefault();
+
+            
+
+            if (lastOrderIDstring.Contains("active"))
+            {
+                Order order = EshopDBContext.Order.Where(o => o.OrderNumber == lastOrderIDstring).FirstOrDefault();
+
+                OrderItem orderItem = new OrderItem
+                {
+                    OrderID = EshopDBContext.Order.Where(o => o.OrderNumber == lastOrderIDstring).FirstOrDefault().ID,
+                    ProductID = id,
+
+                    Amount = 1,
+                    Price = EshopDBContext.Products.Where(carI => carI.ID == id).FirstOrDefault().Price,
+                    Order = order,
+                    Product = productItem
+                };
+
+                EshopDBContext.Add(orderItem);
+                await EshopDBContext.SaveChangesAsync();
+                
+
+            }
+            else
+            {
+                int lastOrderID = Int32.Parse(lastOrderIDstring);
+                string newOrderID = (lastOrderID + 1).ToString() + "active";
+                Order order = new Order();
+                order.OrderNumber = newOrderID;
+                EshopDBContext.Add(order);
+                await EshopDBContext.SaveChangesAsync();
+
+                OrderItem orderItem = new OrderItem
+                {
+                    OrderID = EshopDBContext.Order.Where(o => o.OrderNumber == newOrderID).FirstOrDefault().ID,
+                    ProductID = id,
+
+                    Amount = 1,
+                    Price = EshopDBContext.Products.Where(carI => carI.ID == id).FirstOrDefault().Price,
+                    Order = order,
+                    Product = productItem
+                };
+
+                EshopDBContext.Add(orderItem);
+                await EshopDBContext.SaveChangesAsync();
+                
+            }
+
+            return RedirectToAction(nameof(Detail) + "/"+id.ToString());
+
+
+            
+        }
+
     }
 }
