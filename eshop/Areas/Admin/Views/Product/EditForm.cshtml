@@ -34,6 +34,14 @@
                     </div>
 
                     <div class="form-group">
+                        <label asp-for="@Model.DetailInfo"></label>
+                        <textarea asp-for="@Model.DetailInfo" class="form-control" placeholder="Enter Details info"></textarea>
+                        <span asp-validation-for="@Model.DetailInfo" class="text-danger"></span>
+                    </div>
+
+
+
+                    <div class="form-group">
                         <label asp-for="@Model.ImageAlt"></label>
                         <input asp-for="@Model.ImageAlt" class="form-control" placeholder="Enter ImageAlt">
                         <span asp-validation-for="@Model.ImageAlt" class="text-danger"></span>

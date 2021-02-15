@@ -95,6 +95,7 @@ namespace eshop.Areas.Admin.Controllers
                 productItem.Price = product.Price;
                 productItem.ImageAlt = product.ImageAlt;
                 productItem.ProductInfo = product.ProductInfo;
+                productItem.DetailInfo = product.DetailInfo;
 
                 FileUpload fup = new FileUpload(Env.WebRootPath, "Products", "image");
                 if (String.IsNullOrWhiteSpace(product.ImageSrc = await fup.FileUploadAsync(product.Image)) == false)

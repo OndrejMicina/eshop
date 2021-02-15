@@ -8,86 +8,41 @@
 
 <div class="container">
     <h2>@ViewData["Title"]</h2>
-    <h3>@ViewData["Message"]</h3>
+    <hr />
     <div class="row">
 
-        <div class="col-lg-3">
-            <div class="list-group">
-                <a href="#" class="list-group-item active">Category 1</a>
-                <a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">Category 3</a>
-            </div>
+        <!--<div class="col-lg-3">
+        <div class="list-group">
+            <a href="#" class="list-group-item active">Category 1</a>
+            <a href="#" class="list-group-item">Category 2</a>
+            <a href="#" class="list-group-item">Category 3</a>
         </div>
+    </div>-->
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
 
-            <div class="card mt-4">
-                <img class="card-img-top img-fluid" src="@Model.ImageSrc" alt="@Model.ImageAlt">
-                <div class="card-body">
-                    <h3 class="card-title">@Model.Name</h3>
-                    <h4>$@Model.Price</h4>
-                    <p class="card-text"> @Model.ProductInfo Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-                </div>
+
+        <div class="row">
+            <div class="col-lg-5">
+                <img height="500" src="@Model.ImageSrc" alt="@Model.ImageAlt">
             </div>
-            <hr />
-            <br />
-
-
-
-
-
-
-
-            <div class=" row">
-                <div class="col-lg-3 col-md-6 mb-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="@Model.ImageSrc" class="card-img-top" width="100" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">@Model.Name</h2>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="@Model.ImageSrc" class="card-img-top" width="100" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">@Model.Name</h2>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="@Model.ImageSrc" class="card-img-top" width="100" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">@Model.Name</h2>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 mb-2">
-                    <div class="card" style="width: 18rem;">
-                        <img src="@Model.ImageSrc" class="card-img-top" width="100" alt="...">
-                        <div class="card-body">
-                            <h2 class="card-title">@Model.Name</h2>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-4">
+                <h1 class="card-title" style="text-decoration:solid; text-shadow:2px 1px 2px #808080">@Model.Name</h1>
+                <p class="text"> @Model.ProductInfo </p>
+                <hr />
+                <h4> Get this game for: $@Model.Price</h4>
+                <a asp-controller="Products" asp-route-ID="@Model.ID" asp-action="AddToCart" class="btn btn-primary">Add to cart</a>
             </div>
-
         </div>
-        <!-- /.col-lg-9 -->
+        <hr />
+        @Html.Raw(@Model.DetailInfo)        
+        <hr />      
 
-    </div> 
+    </div>
+    <!-- /.col-lg-9 -->
 
 </div>
+
 <!-- /.container -->
 
 

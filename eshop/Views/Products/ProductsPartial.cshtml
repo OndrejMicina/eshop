@@ -27,13 +27,13 @@
                     {
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="card h-100">
-                                <a asp-area="" asp-controller="Products" asp-route-ID="@product.ID" asp-action="Detail"><img class="card-img-top img-responsive" src="@product.ImageSrc" alt=""></a>
+                                <a asp-controller="Products" asp-route-ID="@product.ID" asp-action="Detail"><img class="card-img-top img-responsive" src="@product.ImageSrc" alt=""></a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a asp-area="" asp-controller="Products" asp-route-ID="@product.ID" asp-action="Detail">@product.Name</a>
+                                        <a asp-controller="Products" asp-route-ID="@product.ID" asp-action="Detail">@product.Name</a>
                                     </h4>
                                     <h5>$@product.Price</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>                                    
+                                    <p class="card-text">@product.ProductInfo.</p>                                    
                                 </div>
                                 <div class="card-footer">
                                     <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>                                    

@@ -1,0 +1,139 @@
+﻿@model IEnumerable<eshop.Models.OrderItem>
+
+@{
+    ViewData["Title"] = "Your cart";
+
+}
+<h2>@ViewData["Title"]</h2>
+<p>Use this area to provide additional information.</p>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeCreated)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Order.OrderNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.DataTarget)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateTimeCreated)
+                    </td>
+                    <td>
+                        <a asp-area="Admin" asp-controller="Cart" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+@if (Model != null)
+{
+    <a asp-action="Order" class="btn btn-primary">Place order</a>
+}
+else
+{
+    <h3>Your cart is empty!</h3>
+    <br />
+    <br />
+    <br />
+    <br />
+}
+
+<hr />
+<h3>Recomended:</h3>
+<hr />
+<div class=" row">
+    <div class="col-lg-3 col-md-6 mb-2">
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/Products/grand-theft-auto-4-ps3-7357.jpg" class="card-img-top" width="100" alt="...">
+            <div class="card-body">
+                <h2 class="card-title">GTA V</h2>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-2">
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/Products/farming-simulator-19-xbox-one-381543.jpg" class="card-img-top" width="100" alt="...">
+            <div class="card-body">
+                <h2 class="card-title">Farming</h2>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-2">
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/Products/the-sims-4-zivot-v-meste-cz-pc-dvd-358427.jpg" class="card-img-top" width="100" alt="...">
+            <div class="card-body">
+                <h2 class="card-title">Sims</h2>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-2">
+        <div class="card" style="width: 18rem;">
+            <img src="~/images/Products/battlefield-1-ps4-352476.jpg" class="card-img-top" width="100" alt="...">
+            <div class="card-body">
+                <h2 class="card-title">Battlefield</h2>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>

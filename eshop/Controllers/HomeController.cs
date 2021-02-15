@@ -36,7 +36,7 @@ namespace eshop.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-            throw new Exception("neco se stalo");
+            //throw new Exception("neco se stalo");
             return View();
         }
 
