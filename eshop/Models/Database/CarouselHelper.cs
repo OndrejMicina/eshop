@@ -13,35 +13,16 @@ namespace eshop.Models.Database
             {
                 new Carousel()
                 {   DataTarget="#myCarousel",
-                    ImageSrc ="/images/banner1.svg",
-                    ImageAlt="ASP.NET",
-                    CarouselContent="Learn how to build ASP.NET apps that can run anywhere." +
-                    "<a class=\"btn btn-default\" href=\"https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409\">" +
-                    "Learn More</a>"
+                    ImageSrc ="/images/Carousels/tsushima.png",
+                    ImageAlt="img",
+                    CarouselContent="Ghost of Tsushima"
                 },
                 new Carousel()
                 {   DataTarget="#myCarousel",
-                    ImageSrc ="/images/banner2.svg",
+                    ImageSrc ="/images/Carousels/img.png",
                     ImageAlt="ASP.NET",
-                    CarouselContent="There are powerful new features in Visual Studio for building modern web apps." +
-                    "<a class=\"btn btn-default\" href=\"https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409\">" +
-                    "Learn More</a>"
-                },
-                new Carousel()
-                {   DataTarget="#myCarousel",
-                    ImageSrc ="/images/banner3.svg",
-                    ImageAlt="ASP.NET",
-                    CarouselContent="Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps." +
-                    "<a class=\"btn btn-default\" href=\"https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409\">" +
-                    "Learn More</a>"
-                },
-                new Carousel()
-                {   DataTarget="#myCarousel",
-                    ImageSrc ="/images/carousel/Information-Technology.jpg",
-                    ImageAlt="Information Technology ",
-                    CarouselContent="Information Technology. " +
-                    "<a class=\"btn btn-default\" href=\"https://google.cz\">" +
-                    "Learn More</a>"
+                    CarouselContent="" 
+                    
                 },
             };
             return carousels;

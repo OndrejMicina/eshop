@@ -25,6 +25,7 @@ namespace eshop.Models
         public string ImageAlt { get; set; }
         [Required]
         public string ProductInfo { get; set; }
+        public string DetailInfo { get; set; }
 
 
     }
