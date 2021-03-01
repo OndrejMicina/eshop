@@ -5,7 +5,6 @@
 
 }
 <h2>@ViewData["Title"]</h2>
-<p>Log in to order.</p>
 
 <style>
     .card {
@@ -30,98 +29,68 @@
 
 @if (Model != null)
 {
-    //var context = ViewBag.Products;
-    //List<CommonProducts> CommonProductsDbSet = context.CommonProductsDbSet.ToList();
 
     @foreach (var cartItem in Model)
     {
 
-<div class="card">
+        <div class="card">
 
 
-    <div class="container">
-        <div class="row align-items-center">
-
-            <div class="col-lg-2">
-                <h3><b> @cartItem.CartProduct.Name</b></h3>
-            </div>
-
-            <div class="col-md-2">
-                <img src="@cartItem.CartProduct.ImageSrc" alt="Avatar" style="width:100px;padding-top:10px">
-            </div>
-
-            <div class="col-md-1">
-                <h4><b>Price: </b></h4><h5>$@cartItem.CartProduct.Price</h5>
-            </div>
-
-            <div class="col-md-4">
-                <h4><b>Info: </b></h4><h5>@cartItem.CartProduct.ProductInfo</h5>
-            </div>
-
-
-            <!--<div class="col-lg-1">
-        <a style="margin-top:10px" asp-area="Admin" asp-controller="Cart" asp-action="Delete" asp-route-id="@cartItem.ID">Remove</a>
-    </div>-->
-
-        </div>
-    </div>
-    <hr />
-
-
-
-    @{
-        
-        
-
-        if (cartItem.CommonProductsList != null)
-        {
-            List<Product> commonProd = cartItem.CommonProductsList.ToList();
             <div class="container">
-                <h4>Bought together:</h4>
                 <div class="row align-items-center">
-                    
-                    @foreach (var item in commonProd)
-                {
-                        <div class="card">
-                            <div class="col-sm-2"><h3><a asp-area="Controllers" asp-controller="Products" asp-route-ID="@item.ID" asp-action="Detail">@item.Name  </a></h3></div>
-                        </div>
-                    }
+
+                    <div class="col-lg-2">
+                        <h3><b> @cartItem.CartProduct.Name</b></h3>
+                    </div>
+
+                    <div class="col-md-2">
+                        <img src="@cartItem.CartProduct.ImageSrc" alt="Avatar" style="width:100px;padding-top:10px">
+                    </div>
+
+                    <div class="col-md-1">
+                        <h4><b>Price: </b></h4><h5>$@cartItem.CartProduct.Price</h5>
+                    </div>
+
+                    <div class="col-md-4">
+                        <h4><b>Info: </b></h4><h5>@cartItem.CartProduct.ProductInfo</h5>
+                    </div>
+
+
+                    <div class="col-lg-1">
+                        <a style="margin-top:10px" asp-area="Admin" asp-controller="Cart" asp-action="Delete" asp-route-id="@cartItem.ID">Remove</a>
+                    </div>
 
                 </div>
-
             </div>
             <hr />
-        }
 
 
 
-        //if (ViewBag.ActiveProducts != null)
-        //{
-        //    List<Product> activeProducts = ViewBag.ActiveProducts;
-        //    Product productInRow = activeProducts.Single(p => p.ID == item.ProductID);
-        //    if (productInRow.CommonProducts != null /*&& productInRow.Recomended = true;*/)
-        //    {
-        //        <div class="container">
-        //            <h4>Bought together:</h4>
-        //            <div class="row align-items-center">
-        //                @foreach (var commonProduct in productInRow.CommonProducts)
-        //                {
-        //                    <div class="card">
-        //                        <div class="col-sm-2"><h3><a asp-area="Controllers" asp-controller="Products" asp-route-ID="@commonProduct.ID" asp-action="Detail">@commonProduct.Name  </a></h3></div>
-        //                    </div>
-        //                }
-        //
-        //            </div>
-        //
-        //        </div>
-        //        <hr />
-        //
-        //    }
-        //
-        //
-        //}
-    }
-</div>
+            @{
+
+
+
+                if (cartItem.CommonProductsList != null)
+                {
+                    List<Product> commonProd = cartItem.CommonProductsList.ToList();
+                    <div class="container">
+                        <h4>Bought together:</h4>
+                        <div class="row align-items-center">
+
+                            @foreach (var item in commonProd)
+                            {
+                                <div class="card">
+                                    <div class="col-sm-2"><h3><a asp-area="Controllers" asp-controller="Products" asp-route-ID="@item.ID" asp-action="Detail">@item.Name  </a></h3></div>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                    <hr />
+                }
+            }
+        </div>
 
 
 
@@ -130,61 +99,21 @@
 
 
 
-@if (Model != null)
+@if (Model != null && User.Identity.Name != null && User.Identity.IsAuthenticated)
 {
     <a asp-action="Order" class="btn btn-primary">Place order</a>
 }
-else
+else if (Model != null && (User.Identity.Name == null || !User.Identity.IsAuthenticated))
+{
+    <h3><a asp-area="Security" asp-controller="Account" asp-action="Login">Log in</a> to order.</h3>
+}
+else if (Model == null)
 {
     <h3>Your cart is empty!</h3>
-    <br />
-    <br />
-    <br />
-    <br />
+
 }
-<!--
-<hr />
-<h3>Recomended:</h3>
-<hr />
-<div class=" row">
-    <div class="col-lg-3 col-md-6 mb-2">
-        <div class="card" style="width: 18rem;">
-            <img src="~/images/Products/grand-theft-auto-4-ps3-7357.jpg" class="card-img-top" width="100" alt="...">
-            <div class="card-body">
-                <h2 class="card-title">GTA V</h2>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 mb-2">
-        <div class="card" style="width: 18rem;">
-            <img src="~/images/Products/farming-simulator-19-xbox-one-381543.jpg" class="card-img-top" width="100" alt="...">
-            <div class="card-body">
-                <h2 class="card-title">Farming</h2>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 mb-2">
-        <div class="card" style="width: 18rem;">
-            <img src="~/images/Products/the-sims-4-zivot-v-meste-cz-pc-dvd-358427.jpg" class="card-img-top" width="100" alt="...">
-            <div class="card-body">
-                <h2 class="card-title">Sims</h2>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6 mb-2">
-        <div class="card" style="width: 18rem;">
-            <img src="~/images/Products/battlefield-1-ps4-352476.jpg" class="card-img-top" width="100" alt="...">
-            <div class="card-body">
-                <h2 class="card-title">Battlefield</h2>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
-</div>-->
+<br />
+<br />
+<br />
+<br />
+
