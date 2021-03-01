@@ -134,7 +134,7 @@ namespace eshop.Areas.Admin.Controllers
                             if (cartItm!=item)
                             {
                                 CommonProduct commonProduct = new CommonProduct { ProductID = cartItm.ProductID, CommonProductID = item.CartProduct.ID };
-                                if (!_context.CommonProductsDbSet.Contains(commonProduct))
+                                if (!_context.CommonProductsDbSet.Any(cp=> cp.ProductID == cartItm.ProductID && cp.CommonProductID == item.CartProduct.ID ))
                                 {
                                     _context.CommonProductsDbSet.Add(commonProduct);
                                 }                                
