@@ -50,55 +50,26 @@ namespace eshop.Areas.Admin.Controllers
                         CommonProductsList = commonProducts,
                     };
                     cartItems.Add(cartItem);
-                }
-
-                
+                }                
                 
                 return View(cartItems);
             }
             
             else return View();
         }
-
-        /*public async Task<IActionResult> Delete()
-        {
-
-            if (_context.Order.Any(o => o.OrderNumber.Contains("active")))
-            {
-                int activeOrderID = Int32.Parse(_context.Order.Where(o => o.OrderNumber.Contains("active")).LastOrDefault().OrderNumber);
-                var eshopDBContext = _context.OrderItems.Include(o => o.Order).Include(o => o.Product).Where(o => o.OrderID == activeOrderID);
-                return View(await eshopDBContext.ToListAsync());
-            }
-            else return View();
-
-
-
-            //int activeOrderID = Int32.Parse(_context.Order.Where(o => o.OrderNumber.Contains("active")).LastOrDefault().OrderNumber);
-
-            //var eshopDBContext = _context.OrderItems.Include(o => o.Order).Include(o => o.Product).Where(o => o.OrderID == activeOrderID);
-            //return View(await eshopDBContext.ToListAsync());
-        }*/
+       
 
         public async Task<IActionResult> Delete(int id)
         {
-            /*var orderItem = await _context.OrderItems.FindAsync(id);
-            _context.OrderItems.Remove(orderItem);
+            _context.CartItems.Remove(_context.CartItems.ToArray()[id]);
             await _context.SaveChangesAsync();
-            if (!_context.OrderItems.Where(o=>o.OrderID==orderItem.OrderID).Any())
-            {
-                _context.Order.Remove(_context.Order.Where(o=>o.ID == orderItem.OrderID).FirstOrDefault());
-            }*/
             return RedirectToAction(nameof(Index));
         }
 
-        /*private bool OrderItemExists(int id)
-        {
-            return _context.OrderItems.Any(e => e.ID == id);
-        }*/
 
        public async Task<IActionResult> Order()
         {
-            if (User.Identity.Name != null)
+            if (User.Identity.Name != null && User.Identity.IsAuthenticated)
             {
                 if (_context.CartItems.Any())
                 {
@@ -144,7 +115,7 @@ namespace eshop.Areas.Admin.Controllers
                         }
                     }
                     await _context.SaveChangesAsync();
-                    var pp = _context;
+                    //var pp = _context;
 
                     //vytvorenie objednavky
                     Order order;
@@ -193,8 +164,7 @@ namespace eshop.Areas.Admin.Controllers
                     editingOrder.OrderItems = orderItemsList;
                     await _context.SaveChangesAsync();
                 }
-            }
-                        
+            }                    
 
 
             return View(nameof(Index));
