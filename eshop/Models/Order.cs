@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eshop.Models.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,5 +16,6 @@ namespace eshop.Models
         [StringLength(25)]
         public string OrderNumber { get; set; }
         public IList<OrderItem> OrderItems { get; set; }
+        public string UserName { get; set; }
     }
 }

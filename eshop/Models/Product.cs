@@ -26,7 +26,7 @@ namespace eshop.Models
         [Required]
         public string ProductInfo { get; set; }
         public string DetailInfo { get; set; }
-
+        //public bool Recomended { get; set; }
 
     }
 }

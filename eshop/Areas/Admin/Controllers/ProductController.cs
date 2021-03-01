@@ -54,6 +54,8 @@ namespace eshop.Areas.Admin.Controllers
                 FileUpload fup = new FileUpload(Env.WebRootPath, "Products", "image");
                 product.ImageSrc = await fup.FileUploadAsync(product.Image);
 
+                //mozno nefunguje - v tom pripade nastavit az pri vytvarani objednavky
+
                 EshopDBContext.Products.Add(product);
 
                 await EshopDBContext.SaveChangesAsync();

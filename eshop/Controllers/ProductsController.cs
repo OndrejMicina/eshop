@@ -1,6 +1,7 @@
 ﻿using eshop.Models;
 using eshop.Models.Database;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,7 @@ namespace eshop.Controllers
 
         public ProductsController(EshopDBContext eshopDBContext)
         {
-            this.EshopDBContext = eshopDBContext;
-            
+            this.EshopDBContext = eshopDBContext;            
         }
 
 
@@ -41,69 +41,23 @@ namespace eshop.Controllers
 
         public async Task<IActionResult> AddToCart(int id)
         {
-            //realne nepouzitelne
 
-            string lastOrderIDstring;
-
-            if (!EshopDBContext.Order.Any())
+            var cartItem = new CartItem
             {
-                lastOrderIDstring = "0";
-            }
-            else lastOrderIDstring = EshopDBContext.Order.OrderByDescending(o => o.OrderNumber).FirstOrDefault().OrderNumber;
+                CartProduct = EshopDBContext.Products.Where(carI => carI.ID == id).FirstOrDefault()
+            };
 
-            Product productItem = EshopDBContext.Products.Where(carI => carI.ID == id).FirstOrDefault();
+            await EshopDBContext.CartItems.AddAsync(cartItem);
+            //EshopDBContext.Entry(cartItem).State = EntityState.Added;
 
-            
+            await EshopDBContext.SaveChangesAsync();            
 
-            if (lastOrderIDstring.Contains("active"))
-            {
-                Order order = EshopDBContext.Order.Where(o => o.OrderNumber == lastOrderIDstring).FirstOrDefault();
-
-                OrderItem orderItem = new OrderItem
-                {
-                    OrderID = EshopDBContext.Order.Where(o => o.OrderNumber == lastOrderIDstring).FirstOrDefault().ID,
-                    ProductID = id,
-
-                    Amount = 1,
-                    Price = EshopDBContext.Products.Where(carI => carI.ID == id).FirstOrDefault().Price,
-                    Order = order,
-                    Product = productItem
-                };
-
-                EshopDBContext.Add(orderItem);
-                await EshopDBContext.SaveChangesAsync();
-                
-
-            }
-            else
-            {
-                int lastOrderID = Int32.Parse(lastOrderIDstring);
-                string newOrderID = (lastOrderID + 1).ToString() + "active";
-                Order order = new Order();
-                order.OrderNumber = newOrderID;
-                EshopDBContext.Add(order);
-                await EshopDBContext.SaveChangesAsync();
-
-                OrderItem orderItem = new OrderItem
-                {
-                    OrderID = EshopDBContext.Order.Where(o => o.OrderNumber == newOrderID).FirstOrDefault().ID,
-                    ProductID = id,
-
-                    Amount = 1,
-                    Price = EshopDBContext.Products.Where(carI => carI.ID == id).FirstOrDefault().Price,
-                    Order = order,
-                    Product = productItem
-                };
-
-                EshopDBContext.Add(orderItem);
-                await EshopDBContext.SaveChangesAsync();
-                
-            }
-
-            return RedirectToAction(nameof(Detail) + "/"+id.ToString());
+            return Redirect("https://localhost:44381/Admin/Cart");
+            //return RedirectToAction(nameof(Detail));
 
 
-            
+
+
         }
 
     }

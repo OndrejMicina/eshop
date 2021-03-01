@@ -21,6 +21,9 @@ namespace eshop.Models.Database
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<CommonProduct> CommonProductsDbSet { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,7 +31,9 @@ namespace eshop.Models.Database
             modelBuilder.ApplyConfiguration(new CarouselConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+            modelBuilder.ApplyConfiguration(new CartItemConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new CommonProductsConfiguration());
 
             foreach (var entity in modelBuilder.Model.GetEntityTypes())
             {
